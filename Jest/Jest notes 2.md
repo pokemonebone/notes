@@ -6,7 +6,7 @@ screen.debug()
 screen.debug(undefined, 10_000) // увеличить лимит
 ```
 
-## 1. Проверка что текст есть и текста нет.
+## Проверка что текст есть и текста нет.
 
 ```ts
 const expandButton = screen.getByRole('button', { name: 'далее' })
@@ -38,14 +38,14 @@ const rows = getAllByRole('row')
 expect(rows).toHaveLength(5)
 ```
 
-## 2. Првоерка перехода навигации
+## Првоерка перехода навигации
 
 ```ts
 const urlParams = new URLSearchParams(window.location.search)
 expect(urlParams.get(MODAL_PARAM)).toBe(ModalTypes.CREATE)
 ```
 
-## 3. API моки и компонента
+## API моки и компонента
 
 ```ts
 jest.mock('@api/attorney/endpoints', () => ({
@@ -69,7 +69,7 @@ describe('ModalCreate', () => {
     )
 ```
 
-## 4. Время моки
+## Время моки
 
 ```ts
 describe('ModalCreate', () => {
@@ -84,7 +84,7 @@ describe('ModalCreate', () => {
   })
 ```
 
-## 5. Ввод в поле
+## Ввод в поле
 
 ```ts
 const input = document.getElementById('comment')
@@ -93,7 +93,7 @@ fireEvent.change(input!, { target: { value: text } })
 expect(input).toHaveValue(text)
 ```
 
-## 6. Snapshot
+## Snapshot
 
 ```ts
 test('рендерится как ожидается', () => {
@@ -102,13 +102,68 @@ test('рендерится как ожидается', () => {
 })
 ```
 
-## 7. Хуки
+## Хуки
 
 ```ts
 jest.mock('@hooks/useDocInfo', () => ({
   __esModule: true,
   default: () => ({ isLoading: false, fullUrl: 'http://www.asdasd.com' }),
 }))
+```
+
+## Буфер обмена
+
+```ts
+Object.defineProperty(navigator, 'clipboard', {
+  value: {
+    writeText: jest.fn(),
+  },
+  writable: true,
+})
+
+describe('CopyButton', () => {
+  afterEach(() => {
+    jest.clearAllMocks()
+  })
+
+  test('Тест отображения, копирования и тултипа', async () => {
+    render(
+      <CopyButton textToCopy={textToCopy} textForToast={textForToast} tooltip={tooltip}>
+        {contentText}
+      </CopyButton>
+    )
+
+    const button = screen.getByRole('button')
+    expect(button).toBeInTheDocument()
+    fireEvent.click(button)
+    expect(navigator.clipboard.writeText).toHaveBeenCalledWith(textToCopy)
+```
+
+## тоасты
+
+```ts
+import { toast } from 'react-toastify'
+
+jest.mock('react-toastify', () => ({
+  toast: jest.fn(),
+}))
+
+describe('successToast', () => {
+  it('вызывает toast с SuccessIcon', () => {
+    const message = 'Success message'
+    successToast(message)
+
+    const [content, options] = (toast as unknown as jest.Mock).mock.calls[0]
+
+    const children = Array.isArray(content.props.children)
+      ? content.props.children
+      : [content.props.children]
+
+    expect(content.type).toBe(Content)
+    expect(children[0].type).toBe(Text)
+    expect(children[0].props.children).toBe(message)
+    expect(options.icon.type).toBe(SuccessIcon)
+  })
 ```
 
 ```ts
@@ -129,7 +184,7 @@ await waitFor(() => {
 })
 ```
 
-## 8. Функции
+## Функции
 
 ```ts
 const handleClose = jest.fn()
@@ -140,7 +195,7 @@ expect(ApiAttorney.postFilesInfo).not.toHaveBeenCalled()
 expect(navigate).toHaveBeenCalledWith('/test-path?otherKey=value', undefined)
 ```
 
-## 9. throw
+## throw
 
 ```ts
 describe('GlobalWidgetContext', () => {
