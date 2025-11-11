@@ -102,15 +102,6 @@ test('рендерится как ожидается', () => {
 })
 ```
 
-## Хуки
-
-```ts
-jest.mock('@hooks/useDocInfo', () => ({
-  __esModule: true,
-  default: () => ({ isLoading: false, fullUrl: 'http://www.asdasd.com' }),
-}))
-```
-
 ## Буфер обмена
 
 ```ts
@@ -164,6 +155,15 @@ describe('successToast', () => {
     expect(children[0].props.children).toBe(message)
     expect(options.icon.type).toBe(SuccessIcon)
   })
+```
+
+## Хуки
+
+```ts
+jest.mock('@hooks/useDocInfo', () => ({
+  __esModule: true,
+  default: () => ({ isLoading: false, fullUrl: 'http://www.asdasd.com' }),
+}))
 ```
 
 ```ts
