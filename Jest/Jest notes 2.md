@@ -6,7 +6,7 @@ screen.debug()
 screen.debug(undefined, 10_000) // увеличить лимит
 ```
 
-## Проверка что текст есть и текста нет.
+## Проверка что текст есть и текста нет
 
 ```ts
 const expandButton = screen.getByRole('button', { name: 'далее' })
@@ -38,7 +38,7 @@ const rows = getAllByRole('row')
 expect(rows).toHaveLength(5)
 ```
 
-## Првоерка перехода навигации
+## Проверка перехода навигации
 
 ```ts
 const urlParams = new URLSearchParams(window.location.search)
