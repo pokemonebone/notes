@@ -15,6 +15,16 @@ if (requests.success) {
   setError(requests.error.data.message)
 }
 setIsLoading(false)
+
+...
+const res = await ApiUsers.getUsers()
+if (!res.success) {
+  setIsError(true)
+  setSubmitting(false)
+  return
+}
+
+closeModal()
 ```
 
 ## Основное хранилище функций доступа в виде класса
