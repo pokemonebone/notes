@@ -22,6 +22,10 @@ await waitFor(() => {
   expect(container.querySelector('div[class^="Notification-"]')).not.toBeInTheDocument()
 })
 
+const cell = document.querySelectorAll('div[class*="Cell__CellStyled"]')
+expect(cell.length).toBe(3)
+fireEvent.click(cell[1]!)
+
 const submitButton = getByTestId('apply-button')
 expect(submitButton).toBeInTheDocument()
 fireEvent.click(submitButton)
