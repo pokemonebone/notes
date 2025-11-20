@@ -161,6 +161,23 @@ describe('successToast', () => {
   })
 ```
 
+```ts
+const button = screen.getByRole('button')
+fireEvent.click(button)
+await Promise.resolve()
+expect(navigator.clipboard.writeText).toHaveBeenCalledWith(textToCopy)
+expect(toast).toHaveBeenCalledTimes(1)
+
+fireEvent.mouseEnter(button)
+await waitFor(() => {
+  expect(screen.getByText(tooltip)).toBeInTheDocument()
+})
+fireEvent.mouseLeave(button)
+await waitFor(() => {
+  expect(screen.queryByText(tooltip)).not.toBeInTheDocument()
+})
+```
+
 ## Хуки
 
 ```ts
