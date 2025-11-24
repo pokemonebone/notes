@@ -68,9 +68,14 @@ jest.mock('../../../widgets/RequestHistory', () => ({
 describe('ModalCreate', () => {
   beforeEach(() => {
     jest.clearAllMocks()
-    ;(ApiAttorney.getOperationNonStand as jest.Mock).mockResolvedValue(
-      mockOperationNonStand
-    )
+    ;(ApiAttorney.getOperationNonStand as jest.Mock).mockResolvedValue({
+      success: true,
+      data: {},
+    })
+
+expect(ApiAttorney.patchAttorney).toHaveBeenCalledWith({})
+expect(ApiAttorney.patchAttorney).toHaveBeenCalledTimes(1)
+
 ```
 
 ## Время моки
