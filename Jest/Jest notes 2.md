@@ -227,6 +227,21 @@ await waitFor(() => {
 })
 ```
 
+```ts
+const mockUseDocInfo = jest.fn()
+
+jest.mock('@hooks/useDocInfo', () => ({
+  __esModule: true,
+  default: () => mockUseDocInfo(),
+}))
+
+beforeEach(() => {
+  mockUseDocInfo
+    .mockReturnValueOnce({ isLoading: true, fullUrl: '' })
+    .mockReturnValue({ isLoading: false, fullUrl: 'http://www.asdasd.com' })
+})
+```
+
 ## Функции
 
 ```ts
