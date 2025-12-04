@@ -93,6 +93,23 @@ describe('ModalCreate', () => {
   })
 ```
 
+## Моки таймера setTimeout
+
+```ts
+const testButton = screen.getByRole('button', { name: 'TEST' })
+fireEvent.click(testButton)
+
+await waitFor(() => {
+  expect(Api.getStatus).toHaveBeenCalledTimes(1)
+})
+jest.runAllTimers()
+await waitFor(() => {
+  expect(Api.getStatus).toHaveBeenCalledTimes(2)
+})
+
+expect(Api.postDocument).toHaveBeenCalledTimes(1)
+```
+
 ## Ввод в поле
 
 ```ts
