@@ -96,6 +96,14 @@ describe('ModalCreate', () => {
 ## Моки таймера setTimeout
 
 ```ts
+beforeEach(() => {
+  jest.useFakeTimers()
+})
+
+afterEach(() => {
+  jest.useRealTimers()
+})
+
 const testButton = screen.getByRole('button', { name: 'TEST' })
 fireEvent.click(testButton)
 
