@@ -136,6 +136,16 @@ test('рендерится как ожидается', () => {
 })
 ```
 
+## Тест пустоты
+
+```ts
+if (expectedText) {
+  expect(screen.getByText(expectedText)).toBeInTheDocument()
+} else {
+  expect(container).toBeEmptyDOMElement()
+}
+```
+
 ## Буфер обмена
 
 ```ts
